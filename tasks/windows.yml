@@ -1,0 +1,28 @@
+---
+
+- name: "Create a temp directory for copying registry files."
+  win_file: path=c:/temp/ state=directory
+
+- name: "Copy registry files for configuring secure crypto."
+  win_copy: src=files/ dest=c:/temp/
+
+# https://technet.microsoft.com/library/security/2868725
+# http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls
+
+- name: "Disable NULL, DES, RC2, RC4. Enable AES, 3DES."
+  win_regmerge:
+    path: c:/temp/ciphers.reg
+    compare_to: 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers'
+
+# also helpful:
+# https://www.hass.de/content/setup-your-iis-ssl-perfect-forward-secrecy-and-tls-12
+
+- name: "Disable PCT, SSL, TLS 1.0. Enable TLS 1.1, 1.2."
+  win_regmerge:
+    path: c:/temp/protocols.reg
+    compare_to: 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols'
+
+- name: "Disable MD5."
+  win_regmerge:
+    path: c:/temp/hashes.reg
+    compare_to: 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes'
