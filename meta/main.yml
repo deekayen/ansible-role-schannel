@@ -3,13 +3,12 @@
 galaxy_info:
   author: David Norman
   description: Host more secure communications for services like IIS and winrm.
-  company: CiOX Health
   license: Unlicense
   min_ansible_version: 2.1
   platforms:
   - name: Windows
     versions:
-    - 2012R2
+    - all
   galaxy_tags:
     - windows
     - security
