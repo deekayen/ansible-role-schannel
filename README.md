@@ -52,7 +52,7 @@ Example
 -------
 
     - name: Harden SSL and TLS configurations.
-      hosts: windows2008
+      hosts: windows2012
 
       roles:
         - deekayen.tls

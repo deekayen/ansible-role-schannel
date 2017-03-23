@@ -1,10 +1,14 @@
 ---
 
 - name: "Create a temp directory for copying registry files."
-  win_file: path=c:/temp/ state=directory
+  win_file:
+    path: c:/temp/
+    state: directory
 
 - name: "Copy registry files for configuring secure crypto."
-  win_copy: src=files/ dest=c:/temp/
+  win_copy:
+    src: files/
+    dest: c:/temp/
 
 # https://technet.microsoft.com/library/security/2868725
 # http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls
