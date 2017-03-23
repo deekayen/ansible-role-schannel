@@ -1,0 +1,17 @@
+tls_3des: true
+tls_aes_128: true
+tls_aes_256: true
+tls_des: false
+tls_null: false
+tls_rc2: false
+tls_rc4: false
+
+tls_md5: false
+tls_sha: true
+
+tls_pct: false
+tls_sslv2: false
+tls_sslv3: false
+tls_tlsv10: false
+tls_tlsv11: true
+tls_tlsv12: true

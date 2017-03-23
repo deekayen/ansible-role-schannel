@@ -1,0 +1,97 @@
+---
+
+- name: Set AES 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_aes_128|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set AES 256/256.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 256/256
+    name: Enabled
+    type: dword
+    data: "{{ (tls_aes_256|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set Triple DES 168/168.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
+    name: Enabled
+    type: dword
+    data: "{{ (tls_3des|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set NULL ciphers.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\NULL
+    name: Enabled
+    type: dword
+    data: "{{ (tls_null|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set DES 56/56.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56/56
+    name: Enabled
+    type: dword
+    data: "{{ (tls_des|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC2 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc2|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC2 40/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc2|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC2 56/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc2|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC4 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc4|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC4 40/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc4|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC4 56/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc4|bool)|ternary('4294967295','0')}}"
+    state: present
+
+- name: Set RC4 64/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64/128
+    name: Enabled
+    type: dword
+    data: "{{ (tls_rc4|bool)|ternary('4294967295','0')}}"
+    state: present
