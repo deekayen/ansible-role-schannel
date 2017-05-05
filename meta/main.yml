@@ -3,7 +3,7 @@
 galaxy_info:
   author: David Norman
   company: David Norman
-  description: Alter SCHANNEL registry settings for hashes and ciphers in Windows.
+  description: Alter SCHANNEL registry settings for encryption protocols, ciphers, and hashes in Windows.
   license: BSD
   min_ansible_version: 2.3
   platforms:
