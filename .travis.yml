@@ -29,7 +29,6 @@ install:
 script:
   - ansible-lint -v tasks/main.yml
   - git ls-files | grep yml | xargs ansible-review -q
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
