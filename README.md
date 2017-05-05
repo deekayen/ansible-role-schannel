@@ -1,7 +1,8 @@
 SCHANNEL
 ========
 
-Makes changes to the Windows registry to serve more secure cryptographic
+Makes changes to SCHANNEL settings of the Windows
+registry to serve more secure cryptographic
 communications for services like IIS and winrm.
 
 Ciphers:
