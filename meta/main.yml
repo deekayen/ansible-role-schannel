@@ -3,7 +3,7 @@
 galaxy_info:
   author: David Norman
   company: David Norman
-  description: Host more secure communications for services like IIS and winrm.
+  description: Alter SCHANNEL registry settings for hashes and ciphers in Windows.
   license: BSD
   min_ansible_version: 2.3
   platforms:
