@@ -19,7 +19,7 @@ before_script:
   - ansible-review --version
 
 script:
-  - git ls-files | xargs ansible-review
+  - git ls-files | grep -Ei '^[^[:punct:]].+.(yaml|yml)$' | xargs ansible-review -q
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
