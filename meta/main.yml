@@ -2,6 +2,7 @@
 
 galaxy_info:
   author: David Norman
+  company: David Norman
   description: Host more secure communications for services like IIS and winrm.
   license: BSD
   min_ansible_version: 2.3
@@ -10,6 +11,6 @@ galaxy_info:
     versions:
     - all
   galaxy_tags:
-    - windows
-    - security
+  - windows
+  - security
 dependencies: []
