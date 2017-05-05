@@ -13,22 +13,13 @@ addons:
     - python-pip
 
 install:
-  # Install ansible.
-  - pip install ansible
-  - pip install ansible-lint
   - pip install ansible-review
 
-  # Check ansible version.
-  - ansible --version
-  - ansible-lint --version
+before_script:
   - ansible-review --version
 
-  # Create ansible.cfg with correct roles_path.
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
-
 script:
-  - ansible-lint -v tasks/main.yml
-  - git ls-files | grep yml | xargs ansible-review -q
+  - git ls-files | xargs ansible-review
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
