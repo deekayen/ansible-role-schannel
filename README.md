@@ -1,5 +1,5 @@
-TLS
-===
+SCHANNEL
+========
 
 Makes changes to the Windows registry to serve more secure cryptographic
 communications for services like IIS and winrm.
@@ -31,7 +31,10 @@ Protocols:
 Hashes:
 
 * MD5
-* SHA
+* SHA-1
+* SHA-256
+* SHA-384
+* SHA-512
 
 Related documentation:
 
@@ -57,7 +60,10 @@ tls_rc2: false
 tls_rc4: false
 
 tls_md5: false
-tls_sha: true
+tls_sha1: true
+tls_sha256: true
+tls_sha384: true
+tls_sha512: true
 
 tls_pct: false
 tls_sslv2: false
@@ -70,14 +76,14 @@ tls_tlsv12: true
 Example Playbook
 ----------------
 
-    - name: Harden SSL and TLS configurations.
+    - name: Harden Windows SCHANNEL configurations.
       hosts: windows2012
 
       vars:
         tls_tlsv10: true
 
       roles:
-        - deekayen.tls
+        - deekayen.schannel
 
 Dependencies
 ------------

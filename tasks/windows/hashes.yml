@@ -5,13 +5,37 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\MD5
     name: Enabled
     type: dword
-    data: "{{ (tls_md5|bool)|ternary('4294967295','0')}}"
+    data: "{{ (tls_md5|bool)|ternary('4294967295','0') }}"
     state: present
 
-- name: Set SHA.
+- name: Set SHA-1.
   win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA
     name: Enabled
     type: dword
-    data: "{{ (tls_md5|bool)|ternary('4294967295','0')}}"
+    data: "{{ (tls_sha1|bool)|ternary('4294967295','0') }}"
+    state: present
+
+- name: Set SHA-256.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA256
+    name: Enabled
+    type: dword
+    data: "{{ (tls_sha256|bool)|ternary('4294967295','0') }}"
+    state: present
+
+- name: Set SHA-384.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA384
+    name: Enabled
+    type: dword
+    data: "{{ (tls_sha384|bool)|ternary('4294967295','0') }}"
+    state: present
+
+- name: Set SHA-512.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA512
+    name: Enabled
+    type: dword
+    data: "{{ (tls_sha512|bool)|ternary('4294967295','0') }}"
     state: present

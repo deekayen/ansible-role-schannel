@@ -7,7 +7,10 @@ tls_rc2: false
 tls_rc4: false
 
 tls_md5: false
-tls_sha: true
+tls_sha1: true
+tls_sha256: true
+tls_sha384: true
+tls_sha512: true
 
 tls_pct: false
 tls_sslv2: false
