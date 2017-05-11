@@ -39,7 +39,8 @@ Hashes:
 
 Related documentation:
 
-https://support.microsoft.com/en-us/help/245030/how-to-restrict-the-use-of-certain-cryptographic-algorithms-and-protocols-in-schannel.dll
+* [How to restrict the use of certain cryptographic algorithms and protocols in Schannel.dll](https://support.microsoft.com/en-us/help/245030/how-to-restrict-the-use-of-certain-cryptographic-algorithms-and-protocols-in-schannel.dll)
+* [Schannel Security Support Provider Technical Reference: TLS/SSL Settings](https://technet.microsoft.com/en-us/library/dn786418.aspx)
 
 Requirements
 ------------
