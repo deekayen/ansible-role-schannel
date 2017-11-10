@@ -1,7 +1,7 @@
 ---
 
-- include: windows/ciphers.yml
+- import_tasks: windows/ciphers.yml
 
-- include: windows/hashes.yml
+- import_tasks: windows/hashes.yml
 
-- include: windows/protocols.yml
+- import_tasks: windows/protocols.yml
