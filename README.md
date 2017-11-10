@@ -53,7 +53,7 @@ Role Variables
 Default values are as follows:
 
 ```
-tls_3des: true
+tls_3des: false
 tls_aes_128: true
 tls_aes_256: true
 tls_des: false
