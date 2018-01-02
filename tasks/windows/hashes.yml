@@ -5,7 +5,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\MD5
     name: Enabled
     type: dword
-    data: "{{ (tls_md5|bool)|ternary('4294967295','0') }}"
+    data: "{{ (schannel_md5|bool)|ternary('4294967295','0') }}"
     state: present
 
 - name: Set SHA-1.
@@ -13,7 +13,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA
     name: Enabled
     type: dword
-    data: "{{ (tls_sha1|bool)|ternary('4294967295','0') }}"
+    data: "{{ (schannel_sha1|bool)|ternary('4294967295','0') }}"
     state: present
 
 - name: Set SHA-256.
@@ -21,7 +21,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA256
     name: Enabled
     type: dword
-    data: "{{ (tls_sha256|bool)|ternary('4294967295','0') }}"
+    data: "{{ (schannel_sha256|bool)|ternary('4294967295','0') }}"
     state: present
 
 - name: Set SHA-384.
@@ -29,7 +29,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA384
     name: Enabled
     type: dword
-    data: "{{ (tls_sha384|bool)|ternary('4294967295','0') }}"
+    data: "{{ (schannel_sha384|bool)|ternary('4294967295','0') }}"
     state: present
 
 - name: Set SHA-512.
@@ -37,5 +37,5 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA512
     name: Enabled
     type: dword
-    data: "{{ (tls_sha512|bool)|ternary('4294967295','0') }}"
+    data: "{{ (schannel_sha512|bool)|ternary('4294967295','0') }}"
     state: present

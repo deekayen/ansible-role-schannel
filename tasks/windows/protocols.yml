@@ -5,7 +5,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\PCT 1.0\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_pct|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_pct|bool)|ternary('1','0') }}"
     state: present
 
 - name: Set SSL 2.0 client default.
@@ -13,7 +13,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Client
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_sslv2|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_sslv2|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set SSL 2.0 server state.
@@ -21,7 +21,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_sslv2|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_sslv2|bool)|ternary('1','0') }}"
     state: present
 
 - name: Set SSL 3.0 client default.
@@ -29,7 +29,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_sslv3|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_sslv3|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set SSL 3.0 server state.
@@ -37,7 +37,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_sslv3|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_sslv3|bool)|ternary('1','0') }}"
     state: present
 
 - name: Set TLS 1.0 client default.
@@ -45,7 +45,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_tlsv10|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_tlsv10|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set TLS 1.0 server state.
@@ -53,7 +53,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_tlsv10|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_tlsv10|bool)|ternary('1','0') }}"
     state: present
 
 - name: Set TLS 1.1 client default.
@@ -61,7 +61,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Client
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_tlsv11|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_tlsv11|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set TLS 1.1 server default.
@@ -69,7 +69,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_tlsv11|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_tlsv11|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set TLS 1.1 server state.
@@ -77,7 +77,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_tlsv11|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_tlsv11|bool)|ternary('1','0') }}"
     state: present
 
 - name: Set TLS 1.2 client default.
@@ -85,7 +85,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_tlsv12|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_tlsv12|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set TLS 1.2 server default.
@@ -93,7 +93,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server
     name: DisabledByDefault
     type: dword
-    data: "{{ (tls_tlsv12|bool)|ternary('0','1') }}"
+    data: "{{ (schannel_tlsv12|bool)|ternary('0','1') }}"
     state: present
 
 - name: Set TLS 1.2 server state.
@@ -101,6 +101,5 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server
     name: Enabled
     type: dword
-    data: "{{ (tls_tlsv12|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_tlsv12|bool)|ternary('1','0') }}"
     state: present
-
