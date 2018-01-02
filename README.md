@@ -62,7 +62,7 @@ tls_rc2: false
 tls_rc4: false
 
 tls_md5: false
-tls_sha1: true
+tls_sha1: false
 tls_sha256: true
 tls_sha384: true
 tls_sha512: true
@@ -71,7 +71,7 @@ tls_pct: false
 tls_sslv2: false
 tls_sslv3: false
 tls_tlsv10: false
-tls_tlsv11: true
+tls_tlsv11: false
 tls_tlsv12: true
 ```
 
