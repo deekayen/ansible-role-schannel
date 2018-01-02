@@ -1,6 +1,8 @@
 SCHANNEL
 ========
 
+[![Build Status](https://travis-ci.org/deekayen/ansible-role-schannel.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-schannel)
+
 Makes changes to SCHANNEL settings of the Windows
 registry to serve more secure cryptographic
 communications for services like IIS and winrm.
