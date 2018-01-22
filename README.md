@@ -64,7 +64,7 @@ schannel_rc2: false
 schannel_rc4: false
 
 schannel_md5: false
-schannel_sha1: false
+schannel_sha1: true
 schannel_sha256: true
 schannel_sha384: true
 schannel_sha512: true
@@ -73,7 +73,7 @@ schannel_pct: false
 schannel_sslv2: false
 schannel_sslv3: false
 schannel_tlsv10: false
-schannel_tlsv11: false
+schannel_tlsv11: true
 schannel_tlsv12: true
 ```
 
