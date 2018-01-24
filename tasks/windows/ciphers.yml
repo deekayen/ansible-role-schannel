@@ -1,5 +1,67 @@
 ---
 
+# Cleanup nested SCHANNEL folders.
+
+- name: Remove nested AES 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128/128
+    state: absent
+
+- name: Remove nested AES 256/256.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 256/256
+    state: absent
+
+- name: Remove nested Triple DES 168/168.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
+    state: absent
+
+- name: Remove nested NULL ciphers.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\NULL
+    state: absent
+
+- name: Remove nested DES 56/56.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56/56
+    state: absent
+
+- name: Remove nested RC2 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128/128
+    state: absent
+
+- name: Remove nested RC2 40/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40/128
+    state: absent
+
+- name: Remove nested RC2 56/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56/128
+    state: absent
+
+- name: Remove nested RC4 128/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128
+    state: absent
+
+- name: Remove nested RC4 40/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128
+    state: absent
+
+- name: Set RC4 56/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128
+    state: absent
+
+- name: Remove nested RC4 64/128.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64/128
+    state: absent
+
 # Without creating registry keys first, win_regedit will nest the part after the
 # forward slash in each cipher as another folder instead of part of the name.
 # https://stackoverflow.com/questions/44067327/escaping-slash-in-a-win-regedit-path-on-ansible
