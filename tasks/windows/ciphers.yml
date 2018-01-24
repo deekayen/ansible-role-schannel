@@ -1,5 +1,23 @@
 ---
 
+# Without creating registry keys first, win_regedit will nest the part after the
+# forward slash in each cipher as another folder instead of part of the name.
+# https://stackoverflow.com/questions/44067327/escaping-slash-in-a-win-regedit-path-on-ansible
+- name: "Create cipher registry keys."
+  win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
+  with_items:
+    - "AES 128/128"
+    - "AES 256/256"
+    - "Triple DES 168/168"
+    - "DES 56/56"
+    - "RC2 128/128"
+    - "RC2 40/128"
+    - "RC2 56/128"
+    - "RC4 128/128"
+    - "RC4 40/128"
+    - "RC4 56/128"
+    - "RC4 64/128"
+
 - name: Set AES 128/128.
   win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128/128
