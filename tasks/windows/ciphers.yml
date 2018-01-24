@@ -179,11 +179,6 @@
       delete_key: yes
       state: absent
 
-  - name: "Create cipher registry keys."
-    win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
-    with_items:
-      - "Triple DES 168/168"
-
   - name: Set Triple DES 168/168.
     win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
