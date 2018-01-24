@@ -254,3 +254,16 @@
     type: dword
     data: "{{ (schannel_rc4|bool)|ternary('4294967295','0') }}"
     state: present
+
+- name: "Create Triple DES 168 registry key."
+  win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
+  with_items:
+    - "Triple DES 168"
+
+- name: Set Triple DES 168.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
+    name: Enabled
+    type: dword
+    data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
+    state: present
