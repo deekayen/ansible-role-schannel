@@ -177,7 +177,7 @@
       data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
       state: present
 
-  when: "'Windows Server 2008' in ansible_os_name" or "'Windows 7' in ansible_os_name"
+  when: ansible_os_name | search("Windows Server 2008") or ansible_os_name | search("Windows 7")
 
 - name: Set Triple DES 168.
   win_regedit:
@@ -186,4 +186,4 @@
     type: dword
     data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
     state: present
-  when: not "'Windows Server 2008' in ansible_os_name" and not "'Windows 7' in ansible_os_name"
+  when: not ansible_os_name | search("Windows Server 2008") and not ansible_os_name | search("Windows 7")
