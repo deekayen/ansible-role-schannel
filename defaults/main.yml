@@ -18,3 +18,5 @@ schannel_sslv3: false
 schannel_tlsv10: false
 schannel_tlsv11: true
 schannel_tlsv12: true
+
+schannel_usestrongcrypto: true

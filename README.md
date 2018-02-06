@@ -43,6 +43,8 @@ Related documentation:
 
 * [How to restrict the use of certain cryptographic algorithms and protocols in Schannel.dll](https://support.microsoft.com/en-us/help/245030/how-to-restrict-the-use-of-certain-cryptographic-algorithms-and-protocols-in-schannel.dll)
 * [Schannel Security Support Provider Technical Reference: TLS/SSL Settings](https://technet.microsoft.com/en-us/library/dn786418.aspx)
+# [MS16-065: Description of the TLS/SSL protocol information disclosure vulnerability (CVE-2016-0149): May 10, 2016](https://support.microsoft.com/en-us/help/3155464/ms16-065-description-of-the-tls-ssl-protocol-information-disclosure-vu)
+# [Enabling strong cryptography for all .Net applications](https://www.johnlouros.com/blog/enabling-strong-cryptography-for-all-dot-net-applications)
 
 Requirements
 ------------
@@ -75,6 +77,8 @@ schannel_sslv3: false
 schannel_tlsv10: false
 schannel_tlsv11: true
 schannel_tlsv12: true
+
+schannel_usestrongcrypto: true
 ```
 
 Example Playbook
