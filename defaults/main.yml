@@ -1,4 +1,4 @@
-schannel_dhmodulus: 2048
+schannel_dhmodulus: "00000800"
 
 schannel_3des: false
 schannel_aes_128: true

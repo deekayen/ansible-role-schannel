@@ -58,7 +58,7 @@ Role Variables
 Default values are as follows:
 
 ```
-schannel_dhmodulus: 2048
+schannel_dhmodulus: "00000800"
 
 schannel_3des: false
 schannel_aes_128: true
@@ -85,10 +85,10 @@ schannel_usestrongcrypto: true
 ```
 
 Valid values for schannel_dhmodulus:
-* 1024
-* 2048
-* 3072
-* 4096
+* 1024 = 00000400
+* 2048 = 00000800
+* 3072 = 00000C00
+* 4096 = 00001000
 
 Example Playbook
 ----------------

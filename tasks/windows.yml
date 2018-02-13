@@ -28,6 +28,6 @@
   win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms
     name: Diffie-Hellman
-    data: "{{ [ schannel_dhmodulus ]|map('extract', {'1024': '00000400', '2048': '00000800', '3072': '00000C00', '4096': '00001000'})|first }}"
+    data: "{{ schannel_dhmodulus }}"
     type: dword
     state: present
