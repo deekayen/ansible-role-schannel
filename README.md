@@ -5,7 +5,7 @@ SCHANNEL
 
 Makes changes to SCHANNEL settings of the Windows
 registry to serve more secure cryptographic
-communications for services like IIS and winrm.
+communications for services like IIS and WinRM.
 
 Ciphers:
 
@@ -43,8 +43,9 @@ Related documentation:
 
 * [How to restrict the use of certain cryptographic algorithms and protocols in Schannel.dll](https://support.microsoft.com/en-us/help/245030/how-to-restrict-the-use-of-certain-cryptographic-algorithms-and-protocols-in-schannel.dll)
 * [Schannel Security Support Provider Technical Reference: TLS/SSL Settings](https://technet.microsoft.com/en-us/library/dn786418.aspx)
-# [MS16-065: Description of the TLS/SSL protocol information disclosure vulnerability (CVE-2016-0149): May 10, 2016](https://support.microsoft.com/en-us/help/3155464/ms16-065-description-of-the-tls-ssl-protocol-information-disclosure-vu)
-# [Enabling strong cryptography for all .Net applications](https://www.johnlouros.com/blog/enabling-strong-cryptography-for-all-dot-net-applications)
+* [MS16-065: Description of the TLS/SSL protocol information disclosure vulnerability (CVE-2016-0149): May 10, 2016](https://support.microsoft.com/en-us/help/3155464/ms16-065-description-of-the-tls-ssl-protocol-information-disclosure-vu)
+* [Enabling strong cryptography for all .Net applications](https://www.johnlouros.com/blog/enabling-strong-cryptography-for-all-dot-net-applications)
+* [Updated Support for Diffie-Hellman Key Exchange](https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/3174644)
 
 Requirements
 ------------
@@ -57,6 +58,8 @@ Role Variables
 Default values are as follows:
 
 ```
+schannel_dhmodulus: 2048
+
 schannel_3des: false
 schannel_aes_128: true
 schannel_aes_256: true
@@ -80,6 +83,12 @@ schannel_tlsv12: true
 
 schannel_usestrongcrypto: true
 ```
+
+Valid values for schannel_dhmodulus:
+* 1024
+* 2048
+* 3072
+* 4096
 
 Example Playbook
 ----------------

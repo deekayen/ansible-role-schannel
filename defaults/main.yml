@@ -1,3 +1,5 @@
+schannel_dhmodulus: 2048
+
 schannel_3des: false
 schannel_aes_128: true
 schannel_aes_256: true
