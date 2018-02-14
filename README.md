@@ -46,6 +46,7 @@ Related documentation:
 * [MS16-065: Description of the TLS/SSL protocol information disclosure vulnerability (CVE-2016-0149): May 10, 2016](https://support.microsoft.com/en-us/help/3155464/ms16-065-description-of-the-tls-ssl-protocol-information-disclosure-vu)
 * [Enabling strong cryptography for all .Net applications](https://www.johnlouros.com/blog/enabling-strong-cryptography-for-all-dot-net-applications)
 * [Updated Support for Diffie-Hellman Key Exchange](https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/3174644)
+* [Microsoft security advisory: Updated support for Diffie-Hellman Key Exchange](https://support.microsoft.com/en-us/help/3174644/microsoft-security-advisory-updated-support-for-diffie-hellman-key-exc)
 
 Requirements
 ------------
@@ -58,6 +59,7 @@ Role Variables
 Default values are as follows:
 
 ```
+schannel_dh_enabled: True
 schannel_dhmodulus: 2048
 
 schannel_3des: false

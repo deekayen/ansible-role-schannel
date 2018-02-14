@@ -23,11 +23,29 @@
     type: dword
     state: "{{ (schannel_usestrongcrypto|bool)|ternary('present','absent') }}"
 
+# https://www3.trustwave.com/support/kb/Article.aspx?id=14784
+- name: "Diffie-Hellman key exchange."
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman
+    name: Enabled
+    data: "{{ (schannel_dh_enabled|bool)|ternary('1','0') }}"
+    type: dword
+    state: present
+
 # https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/3174644
 - name: "Update Diffie-Hellman Key Exchange DH modulus minimum."
   win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms
     name: Diffie-Hellman
+    data: "{{ schannel_dhmodulus }}"
+    type: dword
+    state: present
+
+# https://support.microsoft.com/en-us/help/3174644/microsoft-security-advisory-updated-support-for-diffie-hellman-key-exc
+- name: "Update Diffie-Hellman Key Exchange using KB3174644."
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
+    name: ClientMinKeyBitLength
     data: "{{ schannel_dhmodulus }}"
     type: dword
     state: present
