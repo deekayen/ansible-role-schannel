@@ -24,11 +24,12 @@
     state: "{{ (schannel_usestrongcrypto|bool)|ternary('present','absent') }}"
 
 # https://www3.trustwave.com/support/kb/Article.aspx?id=14784
+# DH is enabled by default. Removing the key should turn it back on after reboot.
 - name: "Diffie-Hellman key exchange."
   win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman
     name: Enabled
-    data: "{{ (schannel_dh_enabled|bool)|ternary('1','0') }}"
+    data: "{{ (schannel_dh_enabled|bool)|ternary('4294967295','0') }}"
     type: dword
     state: present
 
