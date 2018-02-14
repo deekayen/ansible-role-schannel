@@ -1,4 +1,8 @@
 ---
 
 - import_tasks: windows.yml
+  tags:
+    - schannel
+    - security
+    - windows
   when: ansible_os_family == 'Windows'

@@ -109,6 +109,13 @@ Dependencies
 
 None.
 
+Tags
+----
+
+* schannel
+* security
+* windows
+
 License
 -------
 
