@@ -36,8 +36,8 @@
 # https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/3174644
 - name: "Update Diffie-Hellman Key Exchange DH modulus minimum."
   win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms
-    name: Diffie-Hellman
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman
+    name: ServerMinKeyBitLength
     data: "{{ schannel_dhmodulus }}"
     type: dword
     state: present
