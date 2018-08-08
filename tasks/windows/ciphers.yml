@@ -79,7 +79,7 @@
     - "RC4 40/128"
     - "RC4 56/128"
     - "RC4 64/128"
-  when: not ansible_os_name | search("Windows Server 2008") and not ansible_os_name | search("Windows 7")
+  when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
 
 - name: Set AES 128/128.
   win_regedit:
@@ -187,7 +187,7 @@
       data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
       state: present
 
-  when: ansible_os_name | search("Windows Server 2008") or ansible_os_name | search("Windows 7")
+  when: ansible_os_name is search("Windows Server 2008") or ansible_os_name is search("Windows 7")
 
 - name: Set Triple DES 168.
   win_regedit:
@@ -196,4 +196,4 @@
     type: dword
     data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
     state: present
-  when: not ansible_os_name | search("Windows Server 2008") and not ansible_os_name | search("Windows 7")
+  when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
