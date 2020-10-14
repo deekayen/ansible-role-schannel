@@ -1,7 +1,7 @@
 SCHANNEL
 ========
 
-[![Build Status](https://travis-ci.org/deekayen/ansible-role-schannel.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-schannel) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![Build Status](https://travis-ci.org/deekayen/ansible-role-schannel.svg?branch=main)](https://travis-ci.org/deekayen/ansible-role-schannel) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) ![BSD 3-Clause license](https://img.shields.io/badge/license-BSD%203--Clause-blue) ![Linux platform](https://img.shields.io/badge/platform-linux-lightgrey)
 
 Makes changes to SCHANNEL settings of the Windows
 registry to serve more secure cryptographic
