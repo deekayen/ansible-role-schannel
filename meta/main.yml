@@ -2,6 +2,7 @@
 
 galaxy_info:
   role_name: schannel
+  namespace: deekayen
   author: David Norman
   description: Alter SCHANNEL registry settings for encryption protocols, ciphers, and hashes in Windows.
 
