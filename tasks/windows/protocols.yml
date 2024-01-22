@@ -103,3 +103,27 @@
     type: dword
     data: "{{ (schannel_tlsv12|bool)|ternary('1','0') }}"
     state: present
+
+- name: Set DTLS 1.0 server state.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\DTLS 1.0\Server
+    name: Enabled
+    type: dword
+    data: "{{ (schannel_dtlsv10|bool)|ternary('1','0') }}"
+    state: present
+
+- name: Set DTLS 1.0 client default.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\DTLS 1.0\Client
+    name: DisabledByDefault
+    type: dword
+    data: "{{ (schannel_dtlsv10|bool)|ternary('0','1') }}"
+    state: present
+
+- name: Set DTLS 1.0 server default.
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\DTLS 1.0\Server
+    name: DisabledByDefault
+    type: dword
+    data: "{{ (schannel_dtlsv10|bool)|ternary('0','1') }}"
+    state: present
