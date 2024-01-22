@@ -29,6 +29,8 @@ Protocols:
 * TLS 1.0
 * TLS 1.1
 * TLS 1.2
+* DTLS 1.0
+* DTLS 1.2
 
 Hashes:
 
