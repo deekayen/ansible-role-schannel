@@ -87,7 +87,11 @@
 # https://stackoverflow.com/questions/44067327/escaping-slash-in-a-win-regedit-path-on-ansible
 
 - name: "Create cipher registry keys except NULL and Triple DES."
-  ansible.windows.win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
+  ansible.windows.win_shell: |
+    $path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';
+    $key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);
+    $key.CreateSubKey('{{ item }}');
+    $key.Close()
   with_items:
     - "AES 128/128"
     - "AES 256/256"
@@ -217,23 +221,23 @@
   when: ansible_os_name is search("Windows Server 2008") or ansible_os_name is search("Windows 7")
   block:
 
-  - name: Remove Triple DES 168.
-    ansible.windows.win_regedit:
-      path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
-      delete_key: yes
-      state: absent
-    tags:
-      - remove_3des_168
+    - name: Remove Triple DES 168.
+      ansible.windows.win_regedit:
+        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
+        delete_key: true
+        state: absent
+      tags:
+        - remove_3des_168
 
-  - name: Set Triple DES 168/168.
-    ansible.windows.win_regedit:
-      path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
-      name: Enabled
-      type: dword
-      data: "{{ schannel_3des | ternary('4294967295', '0') }}"
-      state: present
-    tags:
-      - set_3des_168_168
+    - name: Set Triple DES 168/168.
+      ansible.windows.win_regedit:
+        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
+        name: Enabled
+        type: dword
+        data: "{{ schannel_3des | ternary('4294967295', '0') }}"
+        state: present
+      tags:
+        - set_3des_168_168
 
 - name: Set Triple DES 168.
   ansible.windows.win_regedit:
