@@ -1,52 +1,71 @@
 ---
 
-- import_tasks: windows/ciphers.yml
+- name: Set ciphers.
+  ansible.builtin.import_tasks: windows/ciphers.yml
+  tags:
+    - ciphers
 
-- import_tasks: windows/hashes.yml
+- name: Set hashes.
+  ansible.builtin.import_tasks: windows/hashes.yml
+  tags:
+    - hashes
 
-- import_tasks: windows/protocols.yml
+- name: Set protocols.
+  ansible.builtin.import_tasks: windows/protocols.yml
+  tags:
+    - protocols
 
 # Regedit to add "SchUseStrongCrypto" key
 - name: "Add SchUseStrongCrypto key to Wow6432Node"
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319
     name: SchUseStrongCrypto
     data: 1
     type: dword
-    state: "{{ (schannel_usestrongcrypto|bool)|ternary('present','absent') }}"
+    state: "{{ schannel_usestrongcrypto | ternary('present', 'absent') }}"
+  tags:
+    - wow6432node
 
 - name: "Add SchUseStrongCrypto key to Microsoft .NET Framework"
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319
     name: SchUseStrongCrypto
     data: 1
     type: dword
-    state: "{{ (schannel_usestrongcrypto|bool)|ternary('present','absent') }}"
+    state: "{{ schannel_usestrongcrypto | ternary('present', 'absent') }}"
+  tags:
+    - dotnet
 
 # https://www3.trustwave.com/support/kb/Article.aspx?id=14784
 # DH is enabled by default. Removing the key should turn it back on after reboot.
 - name: "Diffie-Hellman key exchange."
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman
     name: Enabled
-    data: "{{ (schannel_dh_enabled|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_dh_enabled | ternary('4294967295', '0') }}"
     type: dword
     state: present
+  tags:
+    - dh_exchange
 
 # https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/3174644
 - name: "Update Diffie-Hellman Key Exchange DH modulus minimum."
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman
     name: ServerMinKeyBitLength
     data: "{{ schannel_dhmodulus }}"
     type: dword
     state: present
+  tags:
+    - dh_modulus
 
 # https://support.microsoft.com/en-us/help/3174644/microsoft-security-advisory-updated-support-for-diffie-hellman-key-exc
 - name: "Update Diffie-Hellman Key Exchange using KB3174644."
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
     name: ClientMinKeyBitLength
     data: "{{ schannel_dhmodulus }}"
     type: dword
     state: present
+  tags:
+    - dh_kb3174644

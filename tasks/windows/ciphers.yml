@@ -3,71 +3,91 @@
 # Cleanup nested SCHANNEL folders.
 
 - name: Remove AES 128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - aes128
 
 - name: Remove AES 256.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 256
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - aes256
 
 - name: Remove DES 56.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - des56
 
 - name: Remove RC2 128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc2_128
 
 - name: Remove RC2 40.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc2_40
 
 - name: Remove RC2 56.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc2_56
 
 - name: Remove RC4 128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc4_128
 
 - name: Remove RC4 40.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc4_40
 
 - name: Set RC4 56.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc4_56
 
 - name: Remove RC4 64.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64
-    delete_key: yes
+    delete_key: true
     state: absent
+  tags:
+    - rc4_64
 
 # Without creating registry keys first, win_regedit will nest the part after the
 # forward slash in each cipher as another folder instead of part of the name.
 # https://stackoverflow.com/questions/44067327/escaping-slash-in-a-win-regedit-path-on-ansible
 
 - name: "Create cipher registry keys except NULL and Triple DES."
-  win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
+  ansible.windows.win_shell: "$path=new-item -path 'HKLM:\\System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers';$key = (get-item HKLM:\\).OpenSubKey('System\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers', $true);$key.CreateSubKey('{{ item }}');$key.Close()"
   with_items:
     - "AES 128/128"
     - "AES 256/256"
@@ -80,120 +100,148 @@
     - "RC4 56/128"
     - "RC4 64/128"
   when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
+  tags:
+    - seed_cipher_keys
 
 - name: Set AES 128/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_aes_128|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_aes_128 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - aes_128_128
 
 - name: Set AES 256/256.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 256/256
     name: Enabled
     type: dword
-    data: "{{ (schannel_aes_256|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_aes_256 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - aes_256_256
 
 - name: Set NULL ciphers.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\NULL
     name: Enabled
     type: dword
-    data: "{{ (schannel_null|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_null | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - "null"
 
 - name: Set DES 56/56.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56/56
     name: Enabled
     type: dword
-    data: "{{ (schannel_des|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_des | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - des_56_56
 
 - name: Set RC2 128/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc2|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc2_128_128
 
 - name: Set RC2 40/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc2|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc2_40_128
 
 - name: Set RC2 56/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc2|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc2_56_128
 
 - name: Set RC4 128/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc4|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc4_128_128
 
 - name: Set RC4 40/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc4|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc4_40_128
 
 - name: Set RC4 56/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc4|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc4_56_128
 
 - name: Set RC4 64/128.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64/128
     name: Enabled
     type: dword
-    data: "{{ (schannel_rc4|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - rc4_64_128
 
-# Triple DES needs special handling since it changed from 2008/7 to 2012/8/10.
-
-- block:
+- name: Triple DES needs special handling since it changed from 2008/7 to 2012/8/10.
+  when: ansible_os_name is search("Windows Server 2008") or ansible_os_name is search("Windows 7")
+  block:
 
   - name: Remove Triple DES 168.
-    win_regedit:
+    ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
       delete_key: yes
       state: absent
+    tags:
+      - remove_3des_168
 
   - name: Set Triple DES 168/168.
-    win_regedit:
+    ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
       name: Enabled
       type: dword
-      data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
+      data: "{{ schannel_3des | ternary('4294967295', '0') }}"
       state: present
-
-  when: ansible_os_name is search("Windows Server 2008") or ansible_os_name is search("Windows 7")
+    tags:
+      - set_3des_168_168
 
 - name: Set Triple DES 168.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
     name: Enabled
     type: dword
-    data: "{{ (schannel_3des|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_3des | ternary('4294967295', '0') }}"
     state: present
   when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
+  tags:
+    - 3des_168

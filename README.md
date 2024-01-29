@@ -111,6 +111,8 @@ None.
 Tags
 ----
 
+There's a unique tag on each task. Read inside.
+
 * schannel
 * security
 * windows

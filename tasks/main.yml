@@ -1,8 +1,10 @@
 ---
 
-- import_tasks: windows.yml
+- name: Limit to the whole play to just Windows.
+  ansible.builtin.import_tasks: windows.yml
+  when: ansible_os_family == 'Windows'
   tags:
+    - main
     - schannel
     - security
     - windows
-  when: ansible_os_family == 'Windows'

@@ -1,41 +1,51 @@
 ---
 
 - name: Set MD5.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\MD5
     name: Enabled
     type: dword
-    data: "{{ (schannel_md5|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_md5 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - md5
 
 - name: Set SHA-1.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA
     name: Enabled
     type: dword
-    data: "{{ (schannel_sha1|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_sha1 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - sha1
 
 - name: Set SHA-256.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA256
     name: Enabled
     type: dword
-    data: "{{ (schannel_sha256|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_sha256 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - sha256
 
 - name: Set SHA-384.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA384
     name: Enabled
     type: dword
-    data: "{{ (schannel_sha384|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_sha384 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - sha384
 
 - name: Set SHA-512.
-  win_regedit:
+  ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA512
     name: Enabled
     type: dword
-    data: "{{ (schannel_sha512|bool)|ternary('4294967295','0') }}"
+    data: "{{ schannel_sha512 | ternary('4294967295', '0') }}"
     state: present
+  tags:
+    - sha512
