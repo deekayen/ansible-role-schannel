@@ -85,6 +85,8 @@ schannel_tlsv11: true
 schannel_tlsv12: true
 
 schannel_usestrongcrypto: true
+
+schannel_force_reboot: false
 ```
 
 Valid values for schannel_dhmodulus:
@@ -101,6 +103,7 @@ Example Playbook
 
       vars:
         schannel_tlsv10: true
+        schannel_force_reboot: true
 
       roles:
         - deekayen.schannel

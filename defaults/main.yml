@@ -26,3 +26,5 @@ schannel_tlsv11: true
 schannel_tlsv12: true
 
 schannel_usestrongcrypto: true
+
+schannel_force_reboot: false

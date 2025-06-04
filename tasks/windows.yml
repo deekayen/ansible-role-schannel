@@ -69,3 +69,7 @@
     state: present
   tags:
     - dh_kb3174644
+
+- name: Reboot the machine with all defaults
+  when: schannel_force_reboot
+  ansible.windows.win_reboot:
