@@ -23,6 +23,7 @@ Ciphers:
 
 Protocols:
 
+* Multi-Protocol Unified Hello
 * PCT 1.0
 * SSLv2
 * SSLv3
@@ -69,6 +70,7 @@ schannel_null: false
 schannel_rc2: false
 schannel_rc4: false
 
+schannel_mpuh: false
 schannel_md5: false
 schannel_sha1: true
 schannel_sha256: true

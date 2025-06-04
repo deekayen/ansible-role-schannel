@@ -1,5 +1,15 @@
 ---
 
+- name: Set Multi-Protocol Unified Hello server state.
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\Server
+    name: Enabled
+    type: dword
+    data: "{{ schannel_mpuh | ternary('1', '0') }}"
+    state: present
+  tags:
+    - mpuh
+
 - name: Set PCT 1.0 server state.
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\PCT 1.0\Server
