@@ -23,6 +23,7 @@ Ciphers:
 
 Protocols:
 
+* Multi-Protocol Unified Hello
 * PCT 1.0
 * SSLv2
 * SSLv3
@@ -69,6 +70,7 @@ schannel_null: false
 schannel_rc2: false
 schannel_rc4: false
 
+schannel_mpuh: false
 schannel_md5: false
 schannel_sha1: true
 schannel_sha256: true
@@ -83,6 +85,8 @@ schannel_tlsv11: true
 schannel_tlsv12: true
 
 schannel_usestrongcrypto: true
+
+schannel_force_reboot: false
 ```
 
 Valid values for schannel_dhmodulus:
@@ -99,6 +103,7 @@ Example Playbook
 
       vars:
         schannel_tlsv10: true
+        schannel_force_reboot: true
 
       roles:
         - deekayen.schannel
