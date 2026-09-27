@@ -1,17 +1,15 @@
 ---
-
 galaxy_info:
-  role_name: schannel
   namespace: deekayen
+  role_name: schannel
   author: David Norman
   description: Alter SCHANNEL registry settings for encryption protocols, ciphers, and hashes in Windows.
 
   github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-schannel/issues
 
-  license: BSD
-
-  min_ansible_version: '2.13'
+  license: BSD-3-Clause
+  min_ansible_version: "2.15"
 
   platforms:
     - name: Windows
@@ -21,8 +19,5 @@ galaxy_info:
   galaxy_tags:
     - windows
     - security
-
-collections:
-  - ansible.windows
 
 dependencies: []

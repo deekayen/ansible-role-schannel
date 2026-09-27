@@ -1,5 +1,4 @@
 ---
-
 schannel_dh_enabled: true
 schannel_dhmodulus: 2048
 

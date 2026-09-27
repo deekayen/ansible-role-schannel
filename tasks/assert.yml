@@ -1,0 +1,14 @@
+---
+- name: Assert schannel_dhmodulus is a supported Diffie-Hellman key size.
+  ansible.builtin.assert:
+    that:
+      - schannel_dhmodulus | int in [1024, 2048, 3072, 4096]
+    fail_msg: "schannel_dhmodulus must be 1024, 2048, 3072, or 4096, got: {{ schannel_dhmodulus }}"
+    quiet: true
+
+- name: Assert at least one TLS version stays enabled.
+  ansible.builtin.assert:
+    that:
+      - schannel_tlsv10 | bool or schannel_tlsv11 | bool or schannel_tlsv12 | bool
+    fail_msg: Disabling TLS 1.0, 1.1, and 1.2 together would cut off Schannel clients and servers.
+    quiet: true

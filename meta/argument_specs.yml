@@ -1,0 +1,95 @@
+---
+argument_specs:
+  main:
+    short_description: Alter SCHANNEL registry settings in Windows.
+    description:
+      - Sets the Windows SCHANNEL registry values that enable or disable
+        encryption protocols, ciphers, hashes, and the Diffie-Hellman key
+        exchange, and the .NET SchUseStrongCrypto flag.
+    author:
+      - David Norman
+    options:
+      schannel_dh_enabled:
+        type: bool
+        default: true
+        description: Enable the Diffie-Hellman key exchange.
+      schannel_dhmodulus:
+        type: int
+        default: 2048
+        description: Minimum Diffie-Hellman modulus size in bits for servers and clients (KB3174644).
+      schannel_3des:
+        type: bool
+        default: false
+        description: Enable the Triple DES cipher.
+      schannel_aes_128:
+        type: bool
+        default: true
+        description: Enable the AES 128 cipher.
+      schannel_aes_256:
+        type: bool
+        default: true
+        description: Enable the AES 256 cipher.
+      schannel_des:
+        type: bool
+        default: false
+        description: Enable the DES 56 cipher.
+      schannel_null:
+        type: bool
+        default: false
+        description: Enable the NULL cipher.
+      schannel_rc2:
+        type: bool
+        default: false
+        description: Enable the RC2 ciphers.
+      schannel_rc4:
+        type: bool
+        default: false
+        description: Enable the RC4 ciphers.
+      schannel_md5:
+        type: bool
+        default: false
+        description: Enable the MD5 hash.
+      schannel_sha1:
+        type: bool
+        default: true
+        description: Enable the SHA hash.
+      schannel_sha256:
+        type: bool
+        default: true
+        description: Enable the SHA-256 hash.
+      schannel_sha384:
+        type: bool
+        default: true
+        description: Enable the SHA-384 hash.
+      schannel_sha512:
+        type: bool
+        default: true
+        description: Enable the SHA-512 hash.
+      schannel_pct:
+        type: bool
+        default: false
+        description: Enable the PCT 1.0 protocol.
+      schannel_sslv2:
+        type: bool
+        default: false
+        description: Enable the SSL 2.0 protocol.
+      schannel_sslv3:
+        type: bool
+        default: false
+        description: Enable the SSL 3.0 protocol.
+      schannel_tlsv10:
+        type: bool
+        default: false
+        description: Enable the TLS 1.0 protocol.
+      schannel_tlsv11:
+        type: bool
+        default: true
+        description: Enable the TLS 1.1 protocol.
+      schannel_tlsv12:
+        type: bool
+        default: true
+        description: Enable the TLS 1.2 protocol.
+      schannel_usestrongcrypto:
+        type: bool
+        default: true
+        description: Set SchUseStrongCrypto for the .NET Framework 4 (64- and 32-bit).

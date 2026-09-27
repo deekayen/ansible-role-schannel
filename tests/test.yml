@@ -1,0 +1,7 @@
+---
+- name: Apply the schannel role for a syntax check.
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: deekayen.schannel

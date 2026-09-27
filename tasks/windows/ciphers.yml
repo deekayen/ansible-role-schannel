@@ -1,5 +1,4 @@
 ---
-
 # Cleanup nested SCHANNEL folders.
 
 - name: Remove AES 128.
@@ -103,7 +102,7 @@
     - "RC4 40/128"
     - "RC4 56/128"
     - "RC4 64/128"
-  when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
+  when: not ansible_facts.os_name is search("Windows Server 2008") and not ansible_facts.os_name is search("Windows 7")
   tags:
     - seed_cipher_keys
 
@@ -112,7 +111,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 128/128
     name: Enabled
     type: dword
-    data: "{{ schannel_aes_128 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_aes_128 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - aes_128_128
@@ -122,7 +121,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\AES 256/256
     name: Enabled
     type: dword
-    data: "{{ schannel_aes_256 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_aes_256 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - aes_256_256
@@ -132,7 +131,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\NULL
     name: Enabled
     type: dword
-    data: "{{ schannel_null | ternary('4294967295', '0') }}"
+    data: "{{ schannel_null | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - "null"
@@ -142,7 +141,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56/56
     name: Enabled
     type: dword
-    data: "{{ schannel_des | ternary('4294967295', '0') }}"
+    data: "{{ schannel_des | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - des_56_56
@@ -152,7 +151,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc2 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc2_128_128
@@ -162,7 +161,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc2 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc2_40_128
@@ -172,7 +171,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc2 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc2 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc2_56_128
@@ -182,7 +181,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc4 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc4_128_128
@@ -192,7 +191,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc4 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc4_40_128
@@ -202,7 +201,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc4 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc4_56_128
@@ -212,13 +211,13 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64/128
     name: Enabled
     type: dword
-    data: "{{ schannel_rc4 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_rc4 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - rc4_64_128
 
 - name: Triple DES needs special handling since it changed from 2008/7 to 2012/8/10.
-  when: ansible_os_name is search("Windows Server 2008") or ansible_os_name is search("Windows 7")
+  when: ansible_facts.os_name is search("Windows Server 2008") or ansible_facts.os_name is search("Windows 7")
   block:
 
     - name: Remove Triple DES 168.
@@ -234,7 +233,7 @@
         path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168/168
         name: Enabled
         type: dword
-        data: "{{ schannel_3des | ternary('4294967295', '0') }}"
+        data: "{{ schannel_3des | bool | ternary('4294967295', '0') }}"
         state: present
       tags:
         - set_3des_168_168
@@ -244,8 +243,8 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168
     name: Enabled
     type: dword
-    data: "{{ schannel_3des | ternary('4294967295', '0') }}"
+    data: "{{ schannel_3des | bool | ternary('4294967295', '0') }}"
     state: present
-  when: not ansible_os_name is search("Windows Server 2008") and not ansible_os_name is search("Windows 7")
+  when: not ansible_facts.os_name is search("Windows Server 2008") and not ansible_facts.os_name is search("Windows 7")
   tags:
     - 3des_168

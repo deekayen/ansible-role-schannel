@@ -1,8 +1,12 @@
 ---
+- name: Validate role variables.
+  ansible.builtin.import_tasks: assert.yml
+  tags:
+    - always
 
 - name: Limit to the whole play to just Windows.
   ansible.builtin.import_tasks: windows.yml
-  when: ansible_os_family == 'Windows'
+  when: ansible_facts.os_family == 'Windows'
   tags:
     - main
     - schannel

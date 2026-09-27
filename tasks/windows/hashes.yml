@@ -1,11 +1,10 @@
 ---
-
 - name: Set MD5.
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\MD5
     name: Enabled
     type: dword
-    data: "{{ schannel_md5 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_md5 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - md5
@@ -15,7 +14,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA
     name: Enabled
     type: dword
-    data: "{{ schannel_sha1 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_sha1 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - sha1
@@ -25,7 +24,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA256
     name: Enabled
     type: dword
-    data: "{{ schannel_sha256 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_sha256 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - sha256
@@ -35,7 +34,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA384
     name: Enabled
     type: dword
-    data: "{{ schannel_sha384 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_sha384 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - sha384
@@ -45,7 +44,7 @@
     path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA512
     name: Enabled
     type: dword
-    data: "{{ schannel_sha512 | ternary('4294967295', '0') }}"
+    data: "{{ schannel_sha512 | bool | ternary('4294967295', '0') }}"
     state: present
   tags:
     - sha512
